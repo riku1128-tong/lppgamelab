@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1142170227533029" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>開発ノート：スーパーファミコン風からスマホのブラウザへ｜キシドラ！攻略・遊び方</title>
+<meta name="description" content="キシドラ！がどのように作られてきたか、ドット絵・音楽・遊びやすさの工夫を開発者の目線で紹介します。">
+<link rel="canonical" href="https://lppgamelab.com/devlog/">
+<link rel="icon" href="../kishidora/index.icon.png">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+<header><a class="logo" href="../">LPP GAME LAB</a><nav><a href="../articles/">記事一覧</a><a href="../guide/">遊び方</a><a class="navplay" href="../kishidora/">遊ぶ</a></nav></header>
+<main>
+  <p class="crumb"><a href="../articles/">記事一覧</a> › 開発</p>
+  <article class="article">
+  <h1>開発ノート：スーパーファミコン風からスマホのブラウザへ</h1>
+  <p class="sub">キシドラ！がどのように作られてきたか、ドット絵・音楽・遊びやすさの工夫を開発者の目線で紹介します。　<span class="date">更新：2026-11-13</span></p>
+  <nav class="toc"><p>もくじ</p><ol><li><a href="#s1">始まりはスーパーファミコン用の自作ソフト</a></li><li><a href="#s2">ドット絵へのこだわり</a></li><li><a href="#s3">音楽と効果音</a></li><li><a href="#s4">遊びやすさのための工夫</a></li><li><a href="#s5">テストの話</a></li><li><a href="#s6">これからの開発</a></li></ol></nav>
+  <section class="panel" id="s1">
+    <h2>始まりはスーパーファミコン用の自作ソフト</h2>
+<p>キシドラ！は、もともとスーパーファミコンの実機の決まりに合わせて作り始めたゲームです。画面の大きさ、一度に出せる色の数、使えるメモリの量など、当時の機械の制約の中で、どこまで気持ちのいい戦いが作れるかを試していました。ガードのタイミングを 1 フレーム単位で決める今の戦いのしくみは、そのころから変わっていません。</p>
+<p>その後、より多くの人に遊んでもらうため、ゲームエンジンの Godot を使って、スマートフォンの縦の画面で遊べる形に作り直しました。今では iPhone の Safari やパソコンのブラウザで、インストールなしで遊べます。</p>
+  </section>
+  <section class="panel" id="s2">
+    <h2>ドット絵へのこだわり</h2>
+<p>主人公やモンスターは、1 ドットずつ色を置いたドット絵で描いています。動きのなめらかさを出すため、攻撃や被弾の絵の間に「中割り」の絵を何枚も入れています。下絵づくりには画像生成の道具の助けも借りていますが、最後はゲームの中の大きさで 1 枚ずつ確かめて、ドットの形、目の形、足の位置をそろえ直しています。</p>
+<p>とくに気をつけているのは「顔の大きさ」と「足の位置」です。ポーズが変わったときに頭の大きさや立ち位置がずれると、同じキャラクターに見えなくなってしまうからです。</p>
+  </section>
+  <section class="panel" id="s3">
+    <h2>音楽と効果音</h2>
+<p>エリアごと、ボスごとに専用の曲を用意し、始まりの部分を一度だけ流したあと、曲の途中から自然にくり返すようにしています。ボスの必殺技の中には、曲の拍に合わせて攻撃が来るものもあります。ブラウザでは音が遅れて聞こえることがあるので、拍の時間を少し前に送って、目で見る合図と耳で聞くリズムがそろうように調整しています。</p>
+  </section>
+  <section class="panel" id="s4">
+    <h2>遊びやすさのための工夫</h2>
+<ul>
+<li>iPhone で長く遊んでも本体が熱くなりすぎないよう、動きのない場面では描き直しを減らしています</li>
+<li>最初の読みこみを短くするため、絵や曲は必要になったときに少しずつ読みこみます</li>
+<li>難易度を 5 段階にして、ガードが苦手な人も、腕に自信がある人も楽しめるようにしています</li>
+<li>画面の文字がボタンに重ならないよう、いろいろな画面の大きさで自動のテストを回しています</li>
+</ul>
+  </section>
+  <section class="panel" id="s5">
+    <h2>テストの話</h2>
+<p>キシドラ！では、2,000 以上の自動テストを用意して、ダメージの計算やガードの判定、セーブの読み書きが正しく動いているかを確かめています。さらに、実際の画面を自動で操作して写真を撮る「シナリオ」のテストもあり、ボタンに文字が重なっていないか、演出がきちんと出ているかを一枚ずつ見て確かめています。</p>
+<p>新しいバージョンを出すたびに、主な戦いの場面と画面を一通り流してから公開しています。それでも見つかった不具合は、遊んでくれた人の声をもとに、できるだけ早く直すようにしています。</p>
+  </section>
+  <section class="panel" id="s6">
+    <h2>これからの開発</h2>
+<p>今は、新しい世界と、それぞれの世界に合わせた新しいガードのしくみを作っています。タップ、フリックに続いて、触って楽しい新しいしくみを試しています。公開までもうしばらくお待ちください。</p>
+  </section>
+  </article>
+  <section class="panel related"><h2>あわせて読みたい</h2><ul><li><a href="../updates/">更新履歴</a></li><li><a href="../start/">はじめての冒険ガイド</a></li><li><a href="../battle/">戦いの基本：ターンとカウント</a></li><li><a href="../guard/">ガードの極意：ジャストとミラクルを決めるコツ</a></li><li><a href="../difficulty/">難易度 5 段階のちがい</a></li></ul></section>
+  <p><a class="play" href="../kishidora/">キシドラ！を遊ぶ</a></p>
+</main>
+<footer>
+  <a href="../">トップ</a>
+  <a href="../articles/">記事一覧</a>
+  <a href="../guide/">遊び方</a>
+  <a href="../privacy/">プライバシーポリシー</a>
+  <a href="../contact/">お問い合わせ</a>
+  <span>© LPP GAME LAB</span>
+</footer>
+</body>
+</html>
